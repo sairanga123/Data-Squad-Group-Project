@@ -14,17 +14,23 @@ shinyUI(fluidPage(
   
   # Application title
 
-  titlePanel("A Comparison of Twitter popular opinions to real life
-             political decisions"),
+  titlePanel("A Comparison of Twitter Popular Opinions to Real Life
+             Political Decisions"),
   
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
     sidebarPanel(
-       sliderInput("bins",
-                   "Number of bins:",
-                   min = 1,
-                   max = 50,
-                   value = 30)
+      selectInput(inputId = "policies",
+                  label = "Select Policy", 
+                  choices = c("Net Neutrality", "Gun Control", "Immigration"),
+                  selected = NULL,
+                  multiple = FALSE,
+                  selectize = TRUE),
+      
+      radioButtons(inputId = "retweet",
+                   label = "Select Option:", 
+                   choices = c("With Retweets", "Without Retweets"),
+                   selected = NULL)
     ),
     
     # Show a plot of the generated distribution
