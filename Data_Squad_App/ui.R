@@ -13,7 +13,9 @@ library(shiny)
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  titlePanel("A Comparison of Twitter popular opinions to real life
+             political decisions"),
+  
   
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
