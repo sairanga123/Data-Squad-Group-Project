@@ -35,6 +35,8 @@ immigration.policies.tweets <- searchTwitter(" 'Immigration policies' OR #immigr
                                        n=1000, lang="en", since="2017-01-01")
 immigration.policies.tweets.df <- twListToDF(immigration.policies.tweets)
 
+support.gun.control <- gun.control.tweets.df %>% filter(str_detect(text, "support"))
+
 # Define server logic required to draw a histogram
 
 shinyServer(function(input, output) {
