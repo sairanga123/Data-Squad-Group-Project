@@ -30,8 +30,8 @@ net.neutrality.tweets <- searchTwitter(" 'Net Neutrality' OR #netneutrality OR #
                                        n=1000, lang="en", since="2017-01-01")
 net_neutrality_tweets_df <- twListToDF(net.neutrality.tweets)
 #net neutrality data with retweets
-net_neutrality_support <- dplyr::filter(net_neutrality_tweets_df, grepl("save|need|#saveNetNeutrality|#BreaktheInternet", text))
-net_neutrality_against <- dplyr::filter(net_neutrality_tweets_df, grepl("#stoptheFCC|stop|#NetNeutrality", text))
+net_neutrality_support <- dplyr::filter(net_neutrality_tweets_df, grepl("save|#saveNetNeutrality|#stoptheFCC|#BreaktheInternet", text))
+net_neutrality_against <- dplyr::filter(net_neutrality_tweets_df, grepl("#business|3 pinnochios|#trump|#MAGA", text))
 #net neutrality data without retweets
 net_neutrality_support_wo_retweets <- net_neutrality_support %>% filter(isRetweet == FALSE) %>% select(text) 
 net_neutrality_against_wo_retweets <- net_neutrality_against %>% filter(isRetweet == FALSE) %>% select(text) 
@@ -122,62 +122,62 @@ immigration_ban_city_against_df <- function(geocode, against_text) {
 }
 
 #get SF data 
-San_Francisco_net_neutrality_df_support <- net_neutrality_city_support_df("37.7749,-122.4194","save|need|#saveNetNeutrality|#BreaktheInternet")
-San_Francisco_net_neutrality_df_against <- net_neutrality_city_against_df("37.7749,-122.4194","#stoptheFCC|stop|#NetNeutrality")
+San_Francisco_net_neutrality_df_support <- net_neutrality_city_support_df("37.7749,-122.4194","save|#saveNetNeutrality|#stoptheFCC|#BreaktheInternet")
+San_Francisco_net_neutrality_df_against <- net_neutrality_city_against_df("37.7749,-122.4194","#business|3 pinnochios|#trump|#MAGA")
 San_Francisco_gun_control_df_support <- gun_control_city_support_df("37.7749,-122.4194","#guncontrol|#parkland|ban")
 San_Francisco_gun_control_df_against <- gun_control_city_against_df("37.7749,-122.4194", "#DefendtheSecond|blame|good|do not")
 San_Francisco_immigration_ban_df_support <- immigration_ban_city_support_df("37.7749,-122.4194", "#immigrationban|#trump|#ban|#wall")
 San_Francisco_immigration_ban_df_against <- immigration_ban_city_against_df("37.7749,-122.4194", "#resist|Immigrants|not banned|#notmypresident")
 
-SF_nn_winner <- "against"
+SF_nn_winner <- "support"
 SF_gc_winner <- "support"
 SF_ib_winner <- "against"
 
 #Washington.DC
-Washington_net_neutrality_df_support <- net_neutrality_city_support_df("38.9072,-77.0369","save|need|#saveNetNeutrality|#BreaktheInternet")
-Washington_net_neutrality_df_against <- net_neutrality_city_against_df("38.9072,-77.0369","#stoptheFCC|stop|#NetNeutrality")
+Washington_net_neutrality_df_support <- net_neutrality_city_support_df("38.9072,-77.0369","save|#saveNetNeutrality|#stoptheFCC|#BreaktheInternet")
+Washington_net_neutrality_df_against <- net_neutrality_city_against_df("38.9072,-77.0369","#business|3 pinnochios|#trump|#MAGA")
 Washington_gun_control_df_support <- gun_control_city_support_df("38.9072,-77.0369","#guncontrol|#parkland|ban")
 Washington_gun_control_df_against <- gun_control_city_against_df("38.9072,-77.0369", "#DefendtheSecond|blame|good|do not")
 Washington_immigration_ban_df_support <- immigration_ban_city_support_df("38.9072,-77.0369", "#immigrationban|#trump|#ban|#wall")
 Washington_immigration_ban_df_against <- immigration_ban_city_against_df("38.9072,-77.0369", "#resist|Immigrants|not banned|#notmypresident")
 
-Washington_nn_winner <- "against"
+Washington_nn_winner <- "support"
 Washington_gc_winner <- "support"
 Washingotn_ib_winner <- "against"
 
 #Seattle data 
-Seattle_net_neutrality_df_support <- net_neutrality_city_support_df("47.6062,-122.3321","save|need|#saveNetNeutrality|#BreaktheInternet")
-Seattle_net_neutrality_df_against <- net_neutrality_city_against_df("47.6062,-122.3321","#stoptheFCC|stop|#NetNeutrality")
+Seattle_net_neutrality_df_support <- net_neutrality_city_support_df("47.6062,-122.3321","save|#saveNetNeutrality|#stoptheFCC|#BreaktheInternet")
+Seattle_net_neutrality_df_against <- net_neutrality_city_against_df("47.6062,-122.3321","#business|3 pinnochios|#trump|#MAGA")
 Seattle_gun_control_df_support <- gun_control_city_support_df("47.6062,-122.3321","#guncontrol|#parkland|ban")
 Seattle_gun_control_df_against <- gun_control_city_against_df("47.6062,-122.3321", "#DefendtheSecond|blame|good|do not")
 Seattle_immigration_ban_df_support <- immigration_ban_city_support_df("47.6062,-122.3321", "#immigrationban|#trump|#ban|#wall")
 Seattle_immigration_ban_df_against <- immigration_ban_city_against_df("47.6062,-122.3321", "#resist|Immigrants|not banned|#notmypresident")
 
-Seattle_nn_winner <- "against"
+Seattle_nn_winner <- "support"
 Seattle_gc_winner <- "support"
 Seattle_ib_winner <- "against"
 
 #Oklahoma City data 
-Oklahoma_net_neutrality_df_support <- net_neutrality_city_support_df("35.4676,-97.5164","save|need|#saveNetNeutrality|#BreaktheInternet")
-Oklahoma_net_neutrality_df_against <- net_neutrality_city_against_df("35.4676,-97.5164","#stoptheFCC|stop|#NetNeutrality")
+Oklahoma_net_neutrality_df_support <- net_neutrality_city_support_df("35.4676,-97.5164","save|#saveNetNeutrality|#stoptheFCC|#BreaktheInternet")
+Oklahoma_net_neutrality_df_against <- net_neutrality_city_against_df("35.4676,-97.5164","#business|3 pinnochios|#trump|#MAGA")
 Oklahoma_gun_control_df_support <- gun_control_city_support_df("35.4676,-97.5164","#guncontrol|#parkland|ban")
 Oklahoma_gun_control_df_against <- gun_control_city_against_df("35.4676,-97.5164", "#DefendtheSecond|blame|good|do not")
 Oklahoma_immigration_ban_df_support <- immigration_ban_city_support_df("35.4676,-97.5164", "#immigrationban|#trump|#ban|#wall")
 Oklahoma_immigration_ban_df_against <- immigration_ban_city_against_df("35.4676,-97.5164", "#resist|Immigrants|not banned|#notmypresident")
 
-Oklahoma_nn_winner <- "against"
+Oklahoma_nn_winner <- "support"
 Oklahoma_gc_support <- "support"
 Oklahoma_ib_winner <- "against"
 
 #Omaha, Nebraska data
-Omaha_net_neutrality_df_support <- net_neutrality_city_support_df("41.2524,-95.9980","save|need|#saveNetNeutrality|#BreaktheInternet")
-Omaha_net_neutrality_df_against <- net_neutrality_city_against_df("41.2524,-95.9980","#stoptheFCC|stop|#NetNeutrality")
+Omaha_net_neutrality_df_support <- net_neutrality_city_support_df("41.2524,-95.9980","save|#saveNetNeutrality|#stoptheFCC|#BreaktheInternet")
+Omaha_net_neutrality_df_against <- net_neutrality_city_against_df("41.2524,-95.9980","#business|3 pinnochios|#trump|#MAGA")
 Omaha_gun_control_df_support <- gun_control_city_support_df("41.2524,-95.9980","#guncontrol|#parkland|ban")
 Omaha_gun_control_df_against <- gun_control_city_against_df("41.2524,-95.9980", "#DefendtheSecond|blame|good|do not")
 Omaha_immigration_ban_df_support <- immigration_ban_city_support_df("41.2524,-95.9980", "#immigrationban|#trump|#ban|#wall")
 Omaha_immigration_ban_df_against <- immigration_ban_city_against_df("41.2524,-95.9980", "#resist|Immigrants|not banned|#notmypresident")
 
-Omaha_nn_winner <- "against"
+Omaha_nn_winner <- "support"
 Omaha_gc_support <- "support"
 Omaha_gc_against <- "against"
 
