@@ -30,37 +30,27 @@ setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
 net.neutrality.tweets <- searchTwitter(" 'Net Neutrality' OR #netneutrality OR #savetheinternet", 
                                        n=1000, lang="en", since="2017-01-01")
 net_neutrality_tweets_df <- twListToDF(net.neutrality.tweets)
+rm(net.neutrality.tweets)
+
 #net neutrality data with retweets
 net_neutrality_support <- dplyr::filter(net_neutrality_tweets_df, grepl("save|#saveNetNeutrality|#stoptheFCC|#BreaktheInternet", text))
 net_neutrality_against <- dplyr::filter(net_neutrality_tweets_df, grepl("#business|3 pinnochios|#trump|#MAGA", text))
+rm(net_neutrality_tweets_df)
 #net neutrality data without retweets
 net_neutrality_support_wo_retweets <- net_neutrality_support %>% filter(isRetweet == FALSE) %>% select(text) 
 net_neutrality_against_wo_retweets <- net_neutrality_against %>% filter(isRetweet == FALSE) %>% select(text) 
-
-#data to draw bar graph
-#From this part, we should use input from the ui
-x <- nrow(net_neutrality_support)
-y <- nrow(net_neutrality_against)
-attitude <- c("support", "against")
-number <- c(x, y)
-net_neutrality_graphdf <- data.frame(attitude, number)
-
-p1 <- ggplot(data=net_neutrality_graphdf, aes(x=net_neutrality_graphdf$attitude,y = net_neutrality_graphdf$number, fill = net_neutrality_graphdf$attitude)) + 
-  geom_bar(stat = "identity") + 
-  labs(x="attitude about the policy", y="# of people")
-
 
 ###----------------------------------------------------------------------------------------------------###
 #get tweets on gun control and arrange it into a dataframe 
 gun.control.tweets <- searchTwitter(" 'Gun Control' OR #guncontrol", 
                                        n=1000, lang="en", since="2017-01-01")
 gun_control_tweets_df <- twListToDF(gun.control.tweets)
-
+rm(gun.control.tweets)
 
 # create two groups - gun control supports, and those who are against 
 gun_control_support <- dplyr::filter(gun_control_tweets_df, grepl('#guncontrol|#parkland|ban', text))
 gun_control_against <- dplyr::filter(gun_control_tweets_df, grepl('#DefendtheSecond|blame|good|do not', text))
-
+rm(gun_control_tweets_df)
 #get tweets without any retweets within the dataframe 
 gun_control_against_wo_retweets <- gun_control_against %>% filter(isRetweet == FALSE) %>% select(text) 
 gun_control_support_wo_retweets <- gun_control_support %>% filter(isRetweet == FALSE) %>% select(text) 
@@ -71,17 +61,17 @@ gun_control_support_wo_retweets <- gun_control_support %>% filter(isRetweet == F
 immigration.policies.tweets <- searchTwitter(" 'Immigration Ban' OR #immigration OR #immigrants", 
                                        n=1000, lang="en", since="2017-01-01")
 immigration_policies_tweets_df <- twListToDF(immigration.policies.tweets)
-
+rm(immigration.policies.tweets)
 #immigration data with retweets
-immigration_ban_support <- dplyr::filter(gun_control_tweets_df, grepl("#immigrationban|#trump|#ban|#wall", text))
-immigration_ban_against <- dplyr::filter(gun_control_tweets_df, grepl("#resist|Immigrants|not banned|#notmypresident", text))
-
+immigration_support <- dplyr::filter(immigration_policies_tweets_df, grepl("#immigrationban|#trump|#ban|#wall", text))
+immigration_against <- dplyr::filter(immigration_policies_tweets_df, grepl("#resist|Immigrants|not banned|#notmypresident", text))
+rm(immigration_policies_tweets_df)
 #immigration without retweets
-immigration_ban_against_wo_retweets <- immigration_ban_against %>% filter(isRetweet == FALSE) %>% select(text) 
-immigration_ban_support_wo_retweets <- immigration_ban_support %>% filter(isRetweet == FALSE) %>% select(text) 
+immigration_against_wo_retweets <- immigration_against %>% filter(isRetweet == FALSE) %>% select(text) 
+immigration_support_wo_retweets <- immigration_support %>% filter(isRetweet == FALSE) %>% select(text) 
+
 
 ###-------------------------------------------------------------------------------------------------------###
-
 #Get Data for 5 Cities in the country (3 liberal, 2 conservative)
 
 #6 functions for each issue and getting data for each stance on that issue
@@ -193,14 +183,28 @@ Omaha_nn_winner <- "support"
 Omaha_gc_support <- "support"
 Omaha_gc_against <- "against"
 
-# Define server logic required to draw a histogram
+# Define server logic required to draw graph
 
 shinyServer(function(input, output) {
   
   output$twitterPlot <- renderPlot({
-    ggplot(data=genderData, aes(x=genderData$gender,y = genderData$n, fill = genderData$gender)) + 
-      geom_bar(stat = "identity") + coord_flip() + guides(fill=FALSE) + 
-      labs(x="attitude about the policy", y="# of people")
+
+    ## Do we want with retweet?
+    if("ret" %in% input$retweet) {
+      data1 <- eval(parse(text = paste(input$policies, "support", sep="_")))
+      data2 <- eval(parse(text = paste(input$policies, "against", sep="_")))
+      title <- paste("Position on", input$policies, "with Retweets")
+    } else {
+      data1 <- eval(parse(text = paste(input$policies, "support_wo_retweets", sep="_")))
+      data2 <- eval(parse(text = paste(input$policies, "against_wo_retweets", sep="_")))
+      title <- paste("Position on", input$policies, "without Retweets")
+    }
+    
+    p <- barplot(c(nrow(data1), nrow(data2)), 
+                 main=title, xlab = "Position", ylab = "# of Tweets", 
+                 names.arg = c("Support", "Against"), horiz = FALSE, col = c("grey", "grey"))
+    
+    print(p)
 
   })
   

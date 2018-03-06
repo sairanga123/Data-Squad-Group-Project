@@ -9,6 +9,8 @@
 
 library(shiny)
 
+
+
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
   
@@ -22,15 +24,15 @@ shinyUI(fluidPage(
     sidebarPanel(
       selectInput(inputId = "policies",
                   label = "Select Policy", 
-                  choices = c("Net Neutrality", "Gun Control", "Immigration"),
-                  selected = NULL,
+                  choices = c("net_neutrality", "gun_control", "immigration"),
+                  selected = "net neutrality",
                   multiple = FALSE,
                   selectize = TRUE),
       
-      radioButtons(inputId = "retweet",
-                   label = "Select Option:", 
-                   choices = c("With Retweets", "Without Retweets"),
-                   selected = NULL),
+      checkboxGroupInput(inputId = "retweet",
+                         label = "Select Option:", 
+                         choices = list("With Retweets" = "ret", "Without Retweets" = "noret"),
+                         selected = "ret"),
       
       radioButtons(inputId = "time graph", 
                    label = "Click to view time graph", 
