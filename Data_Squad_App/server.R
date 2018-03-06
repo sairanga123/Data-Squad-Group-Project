@@ -185,7 +185,7 @@ Omaha_gc_against <- "against"
 shinyServer(function(input, output) {
   
   output$twitterPlot <- renderPlot({
-    
+
   })
   
 })
