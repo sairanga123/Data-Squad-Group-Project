@@ -25,7 +25,7 @@ shinyUI(fluidPage(
       selectInput(inputId = "policies",
                   label = "Select Policy", 
                   choices = list("Net Neutrality" = "net_neutrality", "Gun Control" = "gun_control", "Immigration" = "immigration"),
-                  selected = "net neutrality",
+                  selected = "net_neutrality",
                   multiple = FALSE,
                   selectize = TRUE),
       
@@ -44,7 +44,7 @@ shinyUI(fluidPage(
                   choices = c("San Francisco", "Washington D.C.", "Seattle", 
                               "Oklahoma City", "Omaha"),
                   selected = NULL), 
-      radioButtons(inputId = "policies",
+      radioButtons(inputId = "policies2",
                    label = "Select Policy", 
                    choices = c("Net Neutrality", "Gun Control", "Immigration"),
                    selected = NULL), 
@@ -54,9 +54,9 @@ shinyUI(fluidPage(
                    selected = NULL)
     ),
     
-    # Show a plot of the generated distribution
+    # Show plots 
     mainPanel(
-       plotOutput("distPlot")
+       plotOutput("twitterPlot")
     )
   )
 ))
