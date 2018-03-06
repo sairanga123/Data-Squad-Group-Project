@@ -24,14 +24,14 @@ shinyUI(fluidPage(
     sidebarPanel(
       selectInput(inputId = "policies",
                   label = "Select Policy", 
-                  choices = c("net_neutrality", "gun_control", "immigration"),
+                  choices = list("Net Neutrality" = "net_neutrality", "Gun Control" = "gun_control", "Immigration" = "immigration"),
                   selected = "net neutrality",
                   multiple = FALSE,
                   selectize = TRUE),
       
       checkboxGroupInput(inputId = "retweet",
-                         label = "Select Option:", 
-                         choices = list("With Retweets" = "ret", "Without Retweets" = "noret"),
+                         label = "Select Data With Retweets or Without Retweets:", 
+                         choices = list("With Retweets" = "ret"),
                          selected = "ret"),
       
       radioButtons(inputId = "time graph", 
