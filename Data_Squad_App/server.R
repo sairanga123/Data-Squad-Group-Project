@@ -14,6 +14,7 @@ library(RCurl)
 library(RJSONIO)
 library(stringr)
 library("dplyr")
+library(ggplot2)
 
 consumer_key <- 	"XjOeuHJ1izxz0cQK3s6hP4xWb" 
 consumer_secret <- "Bw6k0FpcfGmERk1PrGHGOoGVewYMh0EQpW0Gd2RZVdnQFw8dlI"
@@ -30,12 +31,23 @@ net.neutrality.tweets <- searchTwitter(" 'Net Neutrality' OR #netneutrality OR #
                                        n=1000, lang="en", since="2017-01-01")
 net_neutrality_tweets_df <- twListToDF(net.neutrality.tweets)
 #net neutrality data with retweets
-net_neutrality_support <- dplyr::filter(net_neutrality_tweets_df, grepl("save|need|#saveNetNeutrality|#BreaktheInternet", text))
-net_neutrality_against <- dplyr::filter(net_neutrality_tweets_df, grepl("#stoptheFCC|stop|#NetNeutrality", text))
+net_neutrality_support <- dplyr::filter(net_neutrality_tweets_df, grepl("save|#saveNetNeutrality|#stoptheFCC|#BreaktheInternet", text))
+net_neutrality_against <- dplyr::filter(net_neutrality_tweets_df, grepl("#business|3 pinnochios|#trump|#MAGA", text))
 #net neutrality data without retweets
 net_neutrality_support_wo_retweets <- net_neutrality_support %>% filter(isRetweet == FALSE) %>% select(text) 
 net_neutrality_against_wo_retweets <- net_neutrality_against %>% filter(isRetweet == FALSE) %>% select(text) 
 
+#data to draw bar graph
+#From this part, we should use input from the ui
+x <- nrow(net_neutrality_support)
+y <- nrow(net_neutrality_against)
+attitude <- c("support", "against")
+number <- c(x, y)
+net_neutrality_graphdf <- data.frame(attitude, number)
+
+p1 <- ggplot(data=net_neutrality_graphdf, aes(x=net_neutrality_graphdf$attitude,y = net_neutrality_graphdf$number, fill = net_neutrality_graphdf$attitude)) + 
+  geom_bar(stat = "identity") + 
+  labs(x="attitude about the policy", y="# of people")
 
 
 ###----------------------------------------------------------------------------------------------------###
@@ -186,7 +198,9 @@ Omaha_gc_against <- "against"
 shinyServer(function(input, output) {
   
   output$twitterPlot <- renderPlot({
-    
+    ggplot(data=genderData, aes(x=genderData$gender,y = genderData$n, fill = genderData$gender)) + 
+      geom_bar(stat = "identity") + coord_flip() + guides(fill=FALSE) + 
+      labs(x="attitude about the policy", y="# of people")
   })
   
 })
