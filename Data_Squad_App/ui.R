@@ -34,21 +34,12 @@ shinyUI(fluidPage(
                          choices = list("With Retweets" = "ret"),
                          selected = "ret"),
       
-      radioButtons(inputId = "time graph", 
+      checkboxGroupInput(inputId = "time graph", 
                    label = "Click to view time graph", 
                    choices = c("Time Graph"),
                    selected = NULL),
       
-      selectInput(inputId = "city name", 
-                  label = "Select city name:",
-                  choices = c("San Francisco", "Washington D.C.", "Seattle", 
-                              "Oklahoma City", "Omaha"),
-                  selected = NULL), 
-      radioButtons(inputId = "policies2",
-                   label = "Select Policy", 
-                   choices = c("Net Neutrality", "Gun Control", "Immigration"),
-                   selected = NULL), 
-      radioButtons(inputId = "All Cities Graph", 
+      checkboxGroupInput(inputId = "All Cities Graph", 
                    label = "Click to view graphs", 
                    choices = c("All Cities Comparison Graph"),
                    selected = NULL)
