@@ -53,7 +53,8 @@ shinyUI(fluidPage(
     
     # Show plots 
     mainPanel(
-       plotOutput("twitterPlot")
+       plotOutput("twitterPlot"),
+       plotOutput("timePlot")
     )
   )
 ))
