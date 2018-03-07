@@ -4,7 +4,7 @@ timegraph <- function(df){
     group_by(created)%>%
     summarise(n = n())
   
-  binsize <- ceiling(as.numeric(difftime(max(df$created),min(df$created), units = "min"))/40)
+  binsize <- as.numeric(difftime(max(df$created),min(df$created), units = "min"))/40
   
   i = min(dp$created)
   step = 2

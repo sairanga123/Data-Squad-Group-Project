@@ -45,7 +45,7 @@ shinyUI(fluidPage(
                    choices = c("Time Graph"),
                    selected = NULL),
       
-      checkboxGroupInput(inputId = "All Cities Graph", 
+      checkboxGroupInput(inputId = "AllCitiesGraph", 
                    label = "Click to view graphs", 
                    choices = c("All Cities Comparison Graph"),
                    selected = NULL)
@@ -54,7 +54,8 @@ shinyUI(fluidPage(
     # Show plots 
     mainPanel(
        plotOutput("twitterPlot"),
-       conditionalPanel("input.timegraph == 'Time Graph'",plotOutput("timePlot"))
+       conditionalPanel("input.timegraph == 'Time Graph'", plotOutput("timePlot")),
+       conditionalPanel("input.AllCitiesGraph == 'All Cities Comparison Graph'", plotOutput("cityPlot"))
     )
   )
 ))
