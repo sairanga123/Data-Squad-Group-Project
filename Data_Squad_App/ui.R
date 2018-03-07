@@ -19,6 +19,12 @@ shinyUI(fluidPage(
   titlePanel("A Comparison of Twitter Popular Opinions to Real Life
              Political Decisions"),
   
+  headerPanel(
+    h1("Select Twitter Data:", 
+       style = "font-family: 'Lobster', cursive;
+       font-weight: 500; line-height: 1.1; 
+       color: #4d3a7d;")), 
+  
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
     sidebarPanel(
