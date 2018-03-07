@@ -28,6 +28,9 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
     sidebarPanel(
+      
+      p("The following selections allow you to choose which policy will be shown (net neutrality, gun control, or immigration), whether you want the bar plot to include number of retweets, and whether you want to view a plot of total tweets over time and/or a bar graph of the tweets from 5 different cities"),
+      
       selectInput(inputId = "policies",
                   label = "Select Policy", 
                   choices = list("Net Neutrality" = "net_neutrality", "Gun Control" = "gun_control", "Immigration" = "immigration"),
