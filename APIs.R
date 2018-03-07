@@ -49,16 +49,16 @@ gun_control_support_wo_retweets <- gun_control_support %>% filter(isRetweet == F
 #get tweets on immigration ban and arrange it into a dataframe 
 immigration.policies.tweets <- searchTwitter(" 'Immigration Ban' OR #immigration OR #immigrants", 
                                              n=1000, lang="en", since="2017-01-01")
-immigration_tweets_df <- twListToDF(immigration.policies.tweets)
+immigration_ban_tweets_df <- twListToDF(immigration.policies.tweets)
 rm(immigration.policies.tweets)
 
 #immigration data with retweets
-immigration_support <- dplyr::filter(immigration_policies_tweets_df, grepl("#immigrationban|#trump|#ban|#wall|#MAGA", text))
-immigration_against <- dplyr::filter(immigration_policies_tweets_df, grepl("#resist|not banned|#notmypresident", text))
+immigration_ban_support <- dplyr::filter(immigration_ban_tweets_df, grepl("#immigrationban|#trump|#ban|#wall|#MAGA", text))
+immigration_ban_against <- dplyr::filter(immigration_ban_tweets_df, grepl("#resist|not banned|#notmypresident", text))
 
 #immigration without retweets
-immigration_against_wo_retweets <- immigration_against %>% filter(isRetweet == FALSE) %>% select(text) 
-immigration_support_wo_retweets <- immigration_support %>% filter(isRetweet == FALSE) %>% select(text) 
+immigration_ban_against_wo_retweets <- immigration_ban_against %>% filter(isRetweet == FALSE) %>% select(text) 
+immigration_ban_support_wo_retweets <- immigration_ban_support %>% filter(isRetweet == FALSE) %>% select(text) 
 
 
 ###-------------------------------------------------------------------------------------------------------###

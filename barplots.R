@@ -35,7 +35,7 @@ citiesbarplot <- function(policy){
     net_neutrality_grouped <- barplot(net_neutrality_data, beside = TRUE, names.arg = c("San Francisco", "Seattle", "Washington DC", "Oklahoma City", "Omaha"), 
                                    main = "Net Neutrality Position in 5 Cities", xlab = "Position", ylab = "# of Tweets", col = c("green", "orange"))
     legend("topright", legend = c("Support", "Against"), fill = c("green", "orange"))
-  }else if(policy == "immigration"){  
+  }else if(policy == "immigration_ban"){  
     immigration_ban_control_support <- c(nrow(San_Francisco_immigration_ban_df_support), nrow(Seattle_immigration_ban_df_support), 
                                         nrow(Washington_immigration_ban_df_support), nrow(Oklahoma_immigration_ban_df_support), nrow(Omaha_immigration_ban_df_support))
     immigration_ban_control_against <- c(nrow(San_Francisco_immigration_ban_df_against), nrow(Seattle_immigration_ban_df_against), 

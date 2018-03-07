@@ -33,7 +33,7 @@ shinyUI(fluidPage(
       
       selectInput(inputId = "policies",
                   label = "Select Policy", 
-                  choices = list("Net Neutrality" = "net_neutrality", "Gun Control" = "gun_control", "Immigration" = "immigration"),
+                  choices = list("Net Neutrality" = "net_neutrality", "Gun Control" = "gun_control", "Immigration Ban" = "immigration_ban"),
                   selected = "net_neutrality",
                   multiple = FALSE,
                   selectize = TRUE),
