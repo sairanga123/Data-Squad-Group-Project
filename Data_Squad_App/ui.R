@@ -19,12 +19,21 @@ shinyUI(fluidPage(
   titlePanel("A Comparison of Twitter Popular Opinions to Real Life
              Political Decisions"),
   
+  headerPanel(
+    h3("Select Twitter Data:", 
+       style = "font-family: 'Lobster', cursive;
+       font-weight: 500; line-height: 1.1; 
+       color: #4d3a7d;")), 
+  
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
     sidebarPanel(
+      
+      em("The following selections allow you to choose which policy will be shown (net neutrality, gun control, or immigration), whether you want the bar plot to include number of retweets, and whether you want to view a plot of total tweets over time and/or a bar graph of the tweets from 5 different cities."),
+      
       selectInput(inputId = "policies",
                   label = "Select Policy", 
-                  choices = list("Net Neutrality" = "net_neutrality", "Gun Control" = "gun_control", "Immigration" = "immigration"),
+                  choices = list("Net Neutrality" = "net_neutrality", "Gun Control" = "gun_control", "Immigration Ban" = "immigration_ban"),
                   selected = "net_neutrality",
                   multiple = FALSE,
                   selectize = TRUE),
@@ -34,29 +43,26 @@ shinyUI(fluidPage(
                          choices = list("With Retweets" = "ret"),
                          selected = "ret"),
       
-      radioButtons(inputId = "time graph", 
+      checkboxGroupInput(inputId = "timegraph", 
                    label = "Click to view time graph", 
                    choices = c("Time Graph"),
                    selected = NULL),
       
-      selectInput(inputId = "city name", 
-                  label = "Select city name:",
-                  choices = c("San Francisco", "Washington D.C.", "Seattle", 
-                              "Oklahoma City", "Omaha"),
-                  selected = NULL), 
-      radioButtons(inputId = "policies2",
-                   label = "Select Policy", 
-                   choices = c("Net Neutrality", "Gun Control", "Immigration"),
-                   selected = NULL), 
-      radioButtons(inputId = "All Cities Graph", 
+      checkboxGroupInput(inputId = "AllCitiesGraph", 
                    label = "Click to view graphs", 
                    choices = c("All Cities Comparison Graph"),
-                   selected = NULL)
+                   selected = NULL),
+      
+      strong("Analysis:"),
+      textOutput("analysis")
+
     ),
     
     # Show plots 
     mainPanel(
-       plotOutput("twitterPlot")
+       plotOutput("twitterPlot"),
+       conditionalPanel("input.timegraph == 'Time Graph'", plotOutput("timePlot")),
+       conditionalPanel("input.AllCitiesGraph == 'All Cities Comparison Graph'", plotOutput("cityPlot"))
     )
   )
 ))
