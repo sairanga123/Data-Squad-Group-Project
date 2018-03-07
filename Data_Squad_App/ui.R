@@ -20,7 +20,7 @@ shinyUI(fluidPage(
              Political Decisions"),
   
   headerPanel(
-    h1("Select Twitter Data:", 
+    h3("Select Twitter Data:", 
        style = "font-family: 'Lobster', cursive;
        font-weight: 500; line-height: 1.1; 
        color: #4d3a7d;")), 
@@ -29,7 +29,7 @@ shinyUI(fluidPage(
   sidebarLayout(
     sidebarPanel(
       
-      p("The following selections allow you to choose which policy will be shown (net neutrality, gun control, or immigration), whether you want the bar plot to include number of retweets, and whether you want to view a plot of total tweets over time and/or a bar graph of the tweets from 5 different cities"),
+      em("The following selections allow you to choose which policy will be shown (net neutrality, gun control, or immigration), whether you want the bar plot to include number of retweets, and whether you want to view a plot of total tweets over time and/or a bar graph of the tweets from 5 different cities."),
       
       selectInput(inputId = "policies",
                   label = "Select Policy", 
@@ -51,7 +51,11 @@ shinyUI(fluidPage(
       checkboxGroupInput(inputId = "AllCitiesGraph", 
                    label = "Click to view graphs", 
                    choices = c("All Cities Comparison Graph"),
-                   selected = NULL)
+                   selected = NULL),
+      
+      strong("Analysis:"),
+      textOutput("analysis")
+
     ),
     
     # Show plots 

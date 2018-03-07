@@ -35,4 +35,6 @@ shinyServer(function(input, output) {
   output$timePlot <- renderPlot({timegraph(eval(parse(text = paste(input$policies, "tweets_df", sep = "_"))))})
   
   output$cityPlot <- renderPlot({citiesbarplot(input$policies)})
+  
+  output$analysis <- renderText({analyze(input$policies)})
 })
