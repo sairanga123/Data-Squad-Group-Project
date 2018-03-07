@@ -5,6 +5,7 @@ library(stringr)
 library(dplyr)
 library(ggplot2)
 
+#source("keys.R")
 consumer_key <- 	"XjOeuHJ1izxz0cQK3s6hP4xWb" 
 consumer_secret <- "Bw6k0FpcfGmERk1PrGHGOoGVewYMh0EQpW0Gd2RZVdnQFw8dlI"
 access_token <- "737440271076491264-i7tTdu2U5kztq2TjXT1gcDxlsqcKlYW"
