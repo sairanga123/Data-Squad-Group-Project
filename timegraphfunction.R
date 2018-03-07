@@ -1,13 +1,16 @@
 timegraph <- function(df){
+  
   dp <-df%>%
     group_by(created)%>%
     summarise(n = n())
+  
+  binsize <- ceiling(as.numeric(difftime(max(df$created),min(df$created), units = "min"))/40)
   
   i = min(dp$created)
   step = 2
   times <- c(i)
   while(i <= max(dp$created)){
-    i= i+900
+    i= i+binsize*60
     times[step] = i
     step = step+1
   }
@@ -20,5 +23,5 @@ timegraph <- function(df){
     count[i] <- binneddp[[i]]
   }
   
-  plot(count~times[1:length(times)-1], type = "l", xlab = "time", main = "Total Tweets over Time")
+  return(plot(count~times[1:length(times)-1], type = "l", xlab = "time", main = "Total Tweets over Time"))
 }
