@@ -47,14 +47,14 @@ gun_control_support_wo_retweets <- gun_control_support %>% filter(isRetweet == F
 ###-------------------------------------------------------------------------------------------------------###
 
 #get tweets on immigration ban and arrange it into a dataframe 
-immigration.policies.tweets <- searchTwitter(" 'Immigration Ban' OR #immigration OR #immigrants", 
+immigration.policies.tweets <- searchTwitter(" 'Immigration Ban' OR #immigration OR #immigrants OR #NoWall", 
                                              n=1000, lang="en", since="2017-01-01")
 immigration_ban_tweets_df <- twListToDF(immigration.policies.tweets)
 rm(immigration.policies.tweets)
 
 #immigration data with retweets
 immigration_ban_support <- dplyr::filter(immigration_ban_tweets_df, grepl("#immigrationban|#trump|#ban|#wall|#MAGA", text))
-immigration_ban_against <- dplyr::filter(immigration_ban_tweets_df, grepl("#resist|not banned|#notmypresident", text))
+immigration_ban_against <- dplyr::filter(immigration_ban_tweets_df, grepl("#resist|not banned|#notmypresident|#NoWall", text))
 
 #immigration without retweets
 immigration_ban_against_wo_retweets <- immigration_ban_against %>% filter(isRetweet == FALSE) %>% select(text) 
@@ -98,7 +98,7 @@ gun_control_city_against_df <- function(geocode,against_text) {
 }
 
 immigration_ban_city_support_df <- function(geocode,support_text) { 
-  city_tweets_issue <- searchTwitter(" 'Immigration Ban' OR #immigration OR #immigrants", 
+  city_tweets_issue <- searchTwitter(" 'Immigration Ban' OR #immigration OR #immigrants OR #NoWall", 
                                      n = 1000, lang = "en", since = "2017-01-01", geocode = paste0(geocode, ", 50mi") )   
   city_tweets_issue_df <- twListToDF(city_tweets_issue)
   name1 <- dplyr::filter(city_tweets_issue_df, grepl(support_text, text))
@@ -106,7 +106,7 @@ immigration_ban_city_support_df <- function(geocode,support_text) {
 }
 
 immigration_ban_city_against_df <- function(geocode, against_text) { 
-  city_tweets_issue <- searchTwitter(" 'Immigration Ban' OR #immigration OR #immigrants", 
+  city_tweets_issue <- searchTwitter(" 'Immigration Ban' OR #immigration OR #immigrants OR #NoWall", 
                                      n = 1000, lang = "en", since = "2017-01-01", geocode = paste0(geocode, ", 50mi") )   
   city_tweets_issue_df <- twListToDF(city_tweets_issue)
   name2 <- dplyr::filter(city_tweets_issue_df, grepl(against_text, text))
@@ -119,7 +119,7 @@ San_Francisco_net_neutrality_df_against <- net_neutrality_city_against_df("37.77
 San_Francisco_gun_control_df_support <- gun_control_city_support_df("37.7749,-122.4194","#guncontrol|#parkland|ban|#boycottnra")
 San_Francisco_gun_control_df_against <- gun_control_city_against_df("37.7749,-122.4194", "#DefendtheSecond|#2A|#2a|#NRA|#MAGA")
 San_Francisco_immigration_ban_df_support <- immigration_ban_city_support_df("37.7749,-122.4194", "#immigrationban|#trump|#ban|#wall|#MAGA")
-San_Francisco_immigration_ban_df_against <- immigration_ban_city_against_df("37.7749,-122.4194", "#resist|not banned|#notmypresident")
+San_Francisco_immigration_ban_df_against <- immigration_ban_city_against_df("37.7749,-122.4194", "#resist|not banned|#notmypresident|#NoWall")
 
 SF_nn_winner <- "support"
 SF_gc_winner <- "support"
@@ -131,7 +131,7 @@ Washington_net_neutrality_df_against <- net_neutrality_city_against_df("38.9072,
 Washington_gun_control_df_support <- gun_control_city_support_df("38.9072,-77.0369","#guncontrol|#parkland|ban|#boycottnra")
 Washington_gun_control_df_against <- gun_control_city_against_df("38.9072,-77.0369", "#DefendtheSecond|#2A|#2a|#NRA|#MAGA")
 Washington_immigration_ban_df_support <- immigration_ban_city_support_df("38.9072,-77.0369", "#immigrationban|#trump|#ban|#wall|#MAGA")
-Washington_immigration_ban_df_against <- immigration_ban_city_against_df("38.9072,-77.0369", "#resist|not banned|#notmypresident")
+Washington_immigration_ban_df_against <- immigration_ban_city_against_df("38.9072,-77.0369", "#resist|not banned|#notmypresident|#NoWall")
 
 Washington_nn_winner <- "support"
 Washington_gc_winner <- "support"
@@ -143,7 +143,7 @@ Seattle_net_neutrality_df_against <- net_neutrality_city_against_df("47.6062,-12
 Seattle_gun_control_df_support <- gun_control_city_support_df("47.6062,-122.3321","#guncontrol|#parkland|ban|#boycottnra")
 Seattle_gun_control_df_against <- gun_control_city_against_df("47.6062,-122.3321", "#DefendtheSecond|#2A|#2a|#NRA|#MAGA")
 Seattle_immigration_ban_df_support <- immigration_ban_city_support_df("47.6062,-122.3321", "#immigrationban|#trump|#ban|#wall|#MAGA")
-Seattle_immigration_ban_df_against <- immigration_ban_city_against_df("47.6062,-122.3321", "#resist|not banned|#notmypresident")
+Seattle_immigration_ban_df_against <- immigration_ban_city_against_df("47.6062,-122.3321", "#resist|not banned|#notmypresident|#NoWall")
 
 Seattle_nn_winner <- "support"
 Seattle_gc_winner <- "support"
@@ -155,7 +155,7 @@ Oklahoma_net_neutrality_df_against <- net_neutrality_city_against_df("35.4676,-9
 Oklahoma_gun_control_df_support <- gun_control_city_support_df("35.4676,-97.5164","#guncontrol|#parkland|ban|#boycottnra")
 Oklahoma_gun_control_df_against <- gun_control_city_against_df("35.4676,-97.5164", "#DefendtheSecond|#2A|#2a|#NRA|#MAGA")
 Oklahoma_immigration_ban_df_support <- immigration_ban_city_support_df("35.4676,-97.5164", "#immigrationban|#trump|#ban|#wall|#MAGA")
-Oklahoma_immigration_ban_df_against <- immigration_ban_city_against_df("35.4676,-97.5164", "#resist|not banned|#notmypresident")
+Oklahoma_immigration_ban_df_against <- immigration_ban_city_against_df("35.4676,-97.5164", "#resist|not banned|#notmypresident|#NoWall")
 
 Oklahoma_nn_winner <- "support"
 Oklahoma_gc_support <- "support"
@@ -167,7 +167,7 @@ Omaha_net_neutrality_df_against <- net_neutrality_city_against_df("41.2524,-95.9
 Omaha_gun_control_df_support <- gun_control_city_support_df("41.2524,-95.9980","#guncontrol|#parkland|ban|#boycottnra")
 Omaha_gun_control_df_against <- gun_control_city_against_df("41.2524,-95.9980", "#DefendtheSecond|#2A|#2a|#NRA|#MAGA")
 Omaha_immigration_ban_df_support <- immigration_ban_city_support_df("41.2524,-95.9980", "#immigrationban|#trump|#ban|#wall|#MAGA")
-Omaha_immigration_ban_df_against <- immigration_ban_city_against_df("41.2524,-95.9980", "#resist|not banned|#notmypresident")
+Omaha_immigration_ban_df_against <- immigration_ban_city_against_df("41.2524,-95.9980", "#resist|not banned|#notmypresident|#NoWall")
 
 Omaha_nn_winner <- "support"
 Omaha_gc_support <- "support"
