@@ -202,7 +202,7 @@ shinyServer(function(input, output) {
     
     p <- barplot(c(nrow(data1), nrow(data2)), 
                  main=title, xlab = "Position", ylab = "# of Tweets", 
-                 names.arg = c("Support", "Against"), horiz = FALSE, col = c("grey", "grey"))
+                 names.arg = c("Support", "Against"), horiz = FALSE, col = c("green", "orange"))
     print(p)
 
   })
