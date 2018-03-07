@@ -40,7 +40,7 @@ shinyUI(fluidPage(
                          choices = list("With Retweets" = "ret"),
                          selected = "ret"),
       
-      checkboxGroupInput(inputId = "time graph", 
+      checkboxGroupInput(inputId = "timegraph", 
                    label = "Click to view time graph", 
                    choices = c("Time Graph"),
                    selected = NULL),
@@ -54,7 +54,7 @@ shinyUI(fluidPage(
     # Show plots 
     mainPanel(
        plotOutput("twitterPlot"),
-       plotOutput("timePlot")
+       conditionalPanel("input.timegraph == 'Time Graph'",plotOutput("timePlot"))
     )
   )
 ))
